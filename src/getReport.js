@@ -13,7 +13,7 @@ const getLocationReport = async (locations) => {
     spinner.start()
     spinner.color = 'green';
 
-    const data = [["location", "weather", "temperature", "date"]];
+    const report = [["location", "weather", "temperature", "date"]];
 
     for (let i = 0; i < locations.length; i++) {
  
@@ -28,10 +28,10 @@ const getLocationReport = async (locations) => {
       const temperature = current ? `${current.temperature} degrees` : 'not found'
       const time = location ? location.localtime : 'not found'
 
-      data.push([locationName, weather, temperature, time])
+      report.push([locationName, weather, temperature, time])
     }
     spinner.stop()
-  console.log(table(data))
+  console.log(table(report))
 }
   
   catch (error) { console.log(error)}

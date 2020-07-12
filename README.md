@@ -15,7 +15,6 @@ Given an array of inputs (location name, postal code), log the current time and 
 - node
 - Git
 To run:
-To run:
 
 ```sh
 git clone <https://github.com/tolaked/invisible.git>

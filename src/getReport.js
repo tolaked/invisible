@@ -1,41 +1,41 @@
 const { table } = require("table");
 const ora = require("ora");
 
-const spinner = ora("Loading weather report");
 const locationReport = require("../utils");
 
-const [executor, ignoredBin, script, ...args] = process.argv;
-const input = args
+const spinner = ora("Loading weather report...");
+
+const input = process.argv.slice(2);
+
 const getLocationReport = async (locations) => {
-
-
   try {
-    spinner.start()
-    spinner.color = 'green';
+    spinner.start();
+    spinner.color = "green";
 
     const report = [["location", "weather", "temperature", "date"]];
 
     for (let i = 0; i < locations.length; i++) {
- 
-      
       const locationName = locations[i];
       const response = await locationReport(locationName).then((res) =>
         res.json()
       );
-      const { location, current } = response
-    
-      const weather = current ? current.weather_descriptions[0] : 'not found'
-      const temperature = current ? `${current.temperature} degrees` : 'not found'
-      const time = location ? location.localtime : 'not found'
+      const { location, current } = response;
 
-      report.push([locationName, weather, temperature, time])
+      const weather = current
+        ? current.weather_descriptions[0]
+        : "location not found";
+      const temperature = current
+        ? `${current.temperature} degrees`
+        : "location not found";
+      const time = location ? location.localtime : "not found";
+
+      report.push([locationName, weather, temperature, time]);
     }
-    spinner.stop()
-  console.log(table(report))
-}
-  
-  catch (error) { console.log(error)}
- 
+    spinner.stop();
+    console.log(table(report));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-getLocationReport(input)
+getLocationReport(input);

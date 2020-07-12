@@ -7,13 +7,13 @@ const spinner = ora("Loading weather report...");
 
 const input = process.argv.slice(2);
 
- const getLocationReport = async (locations) => {
-    let report
+const getLocationReport = async (locations) => {
+  let report;
   try {
     spinner.start();
     spinner.color = "green";
 
-     report = [["location", "weather", "temperature", "date"]];
+    report = [["location", "weather", "temperature", "date"]];
 
     for (let i = 0; i < locations.length; i++) {
       const locationName = locations[i];
@@ -37,8 +37,8 @@ const input = process.argv.slice(2);
   } catch (error) {
     console.log(error);
   }
-  return report
+  return report;
 };
 
 getLocationReport(input);
-module.exports =getLocationReport
+module.exports = getLocationReport;
